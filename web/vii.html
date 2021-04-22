@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <script>
+        var xhr=new XMLHttpRequest();
+        function xxx(){
+            if(xhr.readyState==4){
+                if(xhr.status==200){
+
+                    var obj=eval("("+xhr.responseText+")")
+                    var res="un:"+obj.username+"&nbsp;&nbsp;pwd:"+obj.password
+                   document.getElementById("mydiv").innerHTML+=res+"<br>"
+                }
+            }
+        }
+        function login(){
+            xhr.onreadystatechange=xxx
+            xhr.open("POST","/loginJSON",true);
+            xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
+            xhr.send("{\"username\": \"aaa\", \"password\": \"bbb\"}")
+        }
+
+
+    </script>
+</head>
+<body>
+<a href="/loginGet?username=aaa&password=bbb">testget</a><br>
+<form action="/loginForm" method="post">
+    username:<input type="text" name="username"><br>
+    password:<input type="password" name="password"><br>
+    <input type="submit"><br>
+</form>
+<input type="button" value="json" onclick="login()"><br>
+<div id="mydiv"></div>
+</body>
+</html>

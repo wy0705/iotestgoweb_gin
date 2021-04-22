@@ -1,0 +1,11 @@
+注意事项
+gin默认过滤器
+gin.Default()默认使用了Logger和Recovery过滤器，其中：
+
+Logger过滤器将日志写入gin.DefaultWriter，即使配置了GIN_MODE=release。
+Recovery过滤器会recover任何panic。如果有panic的话，会写入500响应码。
+如果不想使用上面两个默认的过滤器，可以使用gin.New()新建一个没有任何默认过滤器的路由。
+
+gin过滤器中使用goroutine
+当在过滤器或handler中启动新的goroutine时，不能使用原始的上下文（c *gin.Context），
+必须使用其只读副本（c.Copy()）。

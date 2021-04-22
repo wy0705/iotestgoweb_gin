@@ -1,0 +1,25 @@
+连接PostgreSQL
+基本代码同上，注意引入对应postgres驱动并正确指定gorm.Open()参数。
+
+import (
+  "github.com/jinzhu/gorm"
+  _ "github.com/jinzhu/gorm/dialects/postgres"
+)
+
+func main() {
+  db, err := gorm.Open("postgres", "host=myhost port=myport user=gorm dbname=gorm password=mypassword")
+  defer db.Close()
+}
+连接Sqlite3
+基本代码同上，注意引入对应sqlite驱动并正确指定gorm.Open()参数。
+
+import (
+  "github.com/jinzhu/gorm"
+  _ "github.com/jinzhu/gorm/dialects/sqlite"
+)
+
+func main() {
+  db, err := gorm.Open("sqlite3", "/tmp/gorm.db")
+  defer db.Close()
+}
+
